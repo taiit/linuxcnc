@@ -233,8 +233,10 @@ void refresh_display(void)
 	    draw_baseline(n + 1, FALSE);
 	}
     }
-    if (vert->chan_enabled[vert->selected - 1]) {
-        draw_baseline(vert->selected, TRUE);
+    if (vert->selected > 0) {
+        if (vert->chan_enabled[vert->selected - 1]) {
+            draw_baseline(vert->selected, TRUE);
+        }
     }
 
     /* Draw trigger line */
@@ -253,9 +255,15 @@ void refresh_display(void)
 	}
     }
     /* draw highlighted waveform last */
-    if ((vert->chan_enabled[vert->selected - 1])
-	&& (vert->data_offset[vert->selected - 1] >= 0)) {
-	draw_waveform(vert->selected, TRUE);
+    //printf("[thv][%s:%s():%d] vert->selected: %d\n", __FILE__, __func__, __LINE__, vert->selected);
+	//printf("[thv][%s:%s():%d] chan_enabled: %d, data_offset: %d\n", __FILE__, __func__, __LINE__, vert->chan_enabled[vert->selected - 1], vert->data_offset[vert->selected - 1] );
+	     
+	// [thv] vert->selected MUST > 0
+    if (vert->selected > 0) {
+        if ((vert->chan_enabled[vert->selected - 1])
+	        && (vert->data_offset[vert->selected - 1] >= 0)) {
+	        draw_waveform(vert->selected, TRUE);
+        }
     }
 
     update_readout();

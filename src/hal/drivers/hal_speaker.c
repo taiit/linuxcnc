@@ -73,7 +73,7 @@
 #ifdef FASTIO
 #define rtapi_inb inb
 #define rtapi_outb outb
-#include <sys/io.h>
+// #include <sys/io.h>
 #endif
 
 /* module information */

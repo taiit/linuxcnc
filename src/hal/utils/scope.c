@@ -93,11 +93,42 @@ static void rm_single_button_clicked(GtkWidget * widget, gpointer * gdata);
 static void rm_roll_button_clicked(GtkWidget * widget, gpointer * gdata);
 static void rm_stop_button_clicked(GtkWidget * widget, gpointer * gdata);
 
+// thv
+// support print backtrace
+#include <execinfo.h>
+/* Obtain a backtrace and print it to stdout. */
+void print_trace (void)
+{
+  void *array[10];
+  char **strings;
+  int size, i;
+
+  size = backtrace (array, 10);
+  strings = backtrace_symbols (array, size);
+  if (strings != NULL)
+  {
+
+    printf ("Obtained %d stack frames.\n", size);
+    for (i = 0; i < size; i++)
+      printf ("%s\n", strings[i]);
+  }
+
+  free (strings);
+}
+
+
 static void exit_on_signal(int signum) {
     fprintf(stderr,"%s Caught signum=%d <%s>\n   killing userspace comp_id=%d\n"
            ,__FILE__,signum,strsignal(signum),comp_id);
     exit_from_hal();
-    exit(1);
+   // exit(1);
+
+    // this is the trick: it will trigger the core dump
+    print_trace();
+    fprintf(stderr,"thv: Try to create core dump\n");
+    signal(signum, SIG_DFL);
+    kill(getpid(), signum);
+
 }
 /***********************************************************************
 *                        MAIN() FUNCTION                               *

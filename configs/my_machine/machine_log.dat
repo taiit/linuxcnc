@@ -1,0 +1,20 @@
+--- QtVCP Screen Started on: Sat, Aug 12 2023 10:38:29 ---
+Sat12 10:38: CRITICAL - no preference file found, enable preferences in screenoptions widget
+Sat12 10:38: Machine OFF
+Sat12 10:38: Hard limits tripped
+Sat12 10:38: Loaded program file : /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
+Sat12 10:38: Loaded file /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
+Sat12 10:38: Failed to find sub 'Oon_abort' before EOF
+Sat12 10:38: Machine ON
+Sat12 10:38: Unexpected realtime delay on task 0 with period 100000
+This Message will only display once per session.
+Run the Latency Test and resolve before continuing.
+
+Sat12 10:38: Started program from line 1
+Sat12 10:39: Run timer stopped at 00:00:08
+Sat12 14:54: Started program from line 1
+Sat12 14:55: Run timer stopped at 00:00:08
+Sat12 14:56: Started program from line 1
+Sat12 14:56: Run timer stopped at 00:00:08
+Sat12 14:56: Started program from line 1
+Sat12 14:57: Run timer stopped at 00:00:08

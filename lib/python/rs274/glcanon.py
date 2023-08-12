@@ -29,6 +29,7 @@ import os
 import re
 import sys
 from functools import reduce
+from OpenGL import platform
 
 def minmax(*args):
     return min(*args), max(*args)
@@ -518,7 +519,13 @@ class GlCanonDraw:
         glMultMatrixd(pmatrix)
         glMatrixMode(GL_MODELVIEW)
 
+        buffer = False
+
         while 1:
+            context = platform.GetCurrentContext()
+            print("[Debug][thv] TODO check valid context in GLCanon self.select_buffer_size: {}, context: {}".format(self.select_buffer_size, context) )
+            if context == 0:
+                break
             glSelectBuffer(self.select_buffer_size)
             glRenderMode(GL_SELECT)
             glInitNames()

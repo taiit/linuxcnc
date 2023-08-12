@@ -665,7 +665,7 @@ class IndicatedPushButton(QtWidgets.QPushButton, _HalWidgetBase):
                     size = self.width() * self._size
                 else:
                     size = self.height() * self._size
-
+                size = int(size)
                 gradient = QtGui.QLinearGradient(top_right- QtCore.QPoint(size, 0), top_right)
                 gradient.setColorAt(0, QtCore.Qt.white)
                 gradient.setColorAt(1, color)
@@ -725,11 +725,13 @@ class IndicatedPushButton(QtWidgets.QPushButton, _HalWidgetBase):
                 grad.setColorAt(.5, QtCore.Qt.white)
                 grad.setColorAt(.8, color)
                 p.setBrush(QtGui.QBrush(grad))
-                p.drawRoundedRect(topRight.x()- self.width()*self._w_fraction-self._right_edge_offset,
-                                    topRight.y()+(self.height()*((1-self._h_fraction)/2)) + self._top_edge_offset,
-                                    self.width()*self._w_fraction,
-                                    self.height()*self._h_fraction,
-                                    self._corner_radius, self._corner_radius)
+                
+                data1 = int(topRight.x()- self.width()*self._w_fraction-self._right_edge_offset)
+                data2 = int(topRight.y()+(self.height()*((1-self._h_fraction)/2)) + self._top_edge_offset)
+                data3 = int(self.width()*self._w_fraction)
+                data4 = int(self.height()*self._h_fraction)
+
+                p.drawRoundedRect(data1, data2, data3, data4, self._corner_radius, self._corner_radius)
 
     def set_indicator(self, data):
         self.draw_indicator = data
@@ -1336,7 +1338,7 @@ class ScaledLabel(QtWidgets.QLabel):
         dh = event.size().height() - event.oldSize().height() # height change
         fs = max(f.pointSizeF(), .5)
         while True:
-            f.setPointSize(fs)
+            f.setPointSize(int(fs))
             #gives bigger text
             #br =  QtGui.QFontMetrics(f).tightBoundingRect(self.textSample())
             # then this

@@ -74,7 +74,7 @@ class HandlerClass:
         if self.desktop_notify:
             NOTE.notify('Welcome','This is a test screen for Qtscreen',None,4)
         self.w.button_frame.setEnabled(False)
-        self.w.jog_slider.setValue(self.jog_velocity)
+        self.w.jog_slider.setValue(int(self.jog_velocity))
         self.w.feed_slider.setValue(100)
         self.w.rapid_slider.setValue(100)
 

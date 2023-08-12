@@ -248,7 +248,7 @@ class HandlerClass:
     def update_spindle(self,w,data):
         self.w.rpm_bar.setInvertedAppearance(bool(data<0))
         self.w.rpm_bar.setFormat('{0:d} RPM'.format(int(data)))
-        self.w.rpm_bar.setValue(abs(data))
+        self.w.rpm_bar.setValue(int(abs(data)))
 
     def update_jog_pins(self, data):
         if type(data) == str:

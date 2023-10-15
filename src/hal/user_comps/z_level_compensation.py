@@ -27,6 +27,7 @@ except Exception as e:
 from enum import Enum, IntEnum, unique
 import linuxcnc
 import hal
+import math
 
 update = 0.05   # this is how often the z external offset value is updated based on current x & y position 
 
@@ -102,7 +103,13 @@ method {} not recognised (outside 0-2). Defaulting to cubic(0).".format(self.h.m
         # get the nearest compensation offset and convert to counts (s32) with a scale (float) 
         # Requested offset == counts * scale
         zo = self.zi[self.Xn, self.Yn]
-        compensation = int(zo / self.scale)
+        comp_f = zo / self.scale
+        
+        if math.isnan(comp_f):
+            #print("thv compensate() return NaN. (X:Y)=({}:{}) zo:{}, scale: {}".format(self.Xn, self.Yn, zo, self.scale) )
+            compensation = 0
+        else:
+            compensation = int(comp_f)
         return compensation
 
     def run(self):

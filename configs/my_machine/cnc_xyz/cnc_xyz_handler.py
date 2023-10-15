@@ -245,10 +245,9 @@ class HandlerClass:
         # external offset control pins
         QHAL.newpin("eoffset-enable", QHAL.HAL_BIT, QHAL.HAL_OUT)
         QHAL.newpin("eoffset-clear", QHAL.HAL_BIT, QHAL.HAL_OUT)
-        QHAL.newpin("eoffset-spindle-count", QHAL.HAL_S32, QHAL.HAL_OUT)
         QHAL.newpin("eoffset-count", QHAL.HAL_S32, QHAL.HAL_OUT)
         
-        pin = QHAL.newpin("eoffset-value", QHAL.HAL_FLOAT, QHAL.HAL_IN)
+        pin = QHAL.newpin("eoffset-value", QHAL.HAL_S32, QHAL.HAL_IN)
         pin.value_changed.connect(self.eoffset_changed)
         
         # Offset z compensation
@@ -463,7 +462,8 @@ class HandlerClass:
         self.w.lbl_mb_errors.setText(str(errors))
     
     def eoffset_changed(self, data):
-        self.w.z_comp_eoffset_value.setText(format(data*.001, '.3f'))
+        scale = 0.001 #zself.h['zeoffset-scale']
+        self.w.z_comp_eoffset_value.setText(format(data*scale, '.3f'))
 
     def comp_count_changed(self):
         if self.w.btn_enable_comp.isChecked():
@@ -824,6 +824,7 @@ class HandlerClass:
     def btn_gripper_clicked(self, state):
         print("thv btn_gripper_clicked")
         AUX_PRGM.load_gcode_ripper()
+        print(dir(self.w.gcodegraphics))
 
     
     def btn_enable_comp_clicked(self, state):
@@ -960,7 +961,6 @@ class HandlerClass:
     def disable_spindle_pause(self):
         self.h['eoffset-count'] = 0
         self.h['spindle-inhibit'] = False
-        self.h['eoffset-spindle-count'] = 0
         if self.w.btn_spindle_pause.isChecked():
             self.w.btn_spindle_pause.setChecked(False)
 
@@ -1031,7 +1031,6 @@ class HandlerClass:
             self.add_status("Machine OFF")
         self.w.btn_spindle_pause.setChecked(False)
         self.h['eoffset-count'] = 0
-        self.h['eoffset-spindle-count'] = 0
         for widget in self.onoff_list:
             self.w[widget].setEnabled(state)
 

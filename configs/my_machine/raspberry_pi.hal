@@ -99,5 +99,3 @@ net tool-prepare-loopback iocontrol.0.tool-prepare => iocontrol.0.tool-prepared
 sets spindle-at-speed true
 
 #net limited          qtdragon.led-limits-tripped <= motion.eoffset-limited
-setp axis.z.eoffset-enable 1
-setp axis.z.eoffset-scale 1.0

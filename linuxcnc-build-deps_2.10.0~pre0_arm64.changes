@@ -1,0 +1,26 @@
+Format: 1.8
+Date: Sun, 04 Jun 2023 12:34:15 +0700
+Source: linuxcnc-build-deps
+Binary: linuxcnc-build-deps
+Built-For-Profiles: noudeb
+Architecture: all
+Version: 1:2.10.0~pre0
+Distribution: unstable
+Urgency: low
+Maintainer: Equivs Dummy Package Generator <taihv@pi-linuxcnc>
+Changed-By: Equivs Dummy Package Generator <taihv@pi-linuxcnc>
+Description:
+ linuxcnc-build-deps - build-dependencies for linuxcnc
+Changes:
+ linuxcnc-build-deps (1:2.10.0~pre0) unstable; urgency=low
+ .
+   * First version
+Checksums-Sha1:
+ 94cd4229ebaf03897aa0050c739404c44308bed4 2780 linuxcnc-build-deps_2.10.0~pre0_all.deb
+ 8e56cbbec6b9e77ef02ec7c0517b3a5f5b6ddf55 5818 linuxcnc-build-deps_2.10.0~pre0_arm64.buildinfo
+Checksums-Sha256:
+ 4907f06bd20a9a56ced0d1cc24f927a5cea43a37097cbbf40fabae39d29f3f7c 2780 linuxcnc-build-deps_2.10.0~pre0_all.deb
+ 6e23b9f18b63213f43ce9044f10ade88432f564578b9cba8f407c7860a269026 5818 linuxcnc-build-deps_2.10.0~pre0_arm64.buildinfo
+Files:
+ 1ba00f84daddc45e09b7f74d339b0b65 2780 devel optional linuxcnc-build-deps_2.10.0~pre0_all.deb
+ a5fca4199dbe9fb9ca7144033c3cb42e 5818 devel optional linuxcnc-build-deps_2.10.0~pre0_arm64.buildinfo

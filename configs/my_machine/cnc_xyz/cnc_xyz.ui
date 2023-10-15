@@ -7383,6 +7383,27 @@ TO FILE</string>
                           </property>
                          </spacer>
                         </item>
+                        <!-- thv add open gripper -->
+                        <item>
+                         <widget class="PushButton" name="btn_gripper">
+                          <property name="minimumSize">
+                           <size>
+                            <width>96</width>
+                            <height>50</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>96</width>
+                            <height>50</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Open Gripper</string>
+                          </property>
+                         </widget>
+                        </item>
+
                         <item>
                          <widget class="PushButton" name="pushbutton_2">
                           <property name="minimumSize">
@@ -8872,10 +8893,10 @@ MM/MIN</string>
                           </size>
                          </property>
                          <property name="toolTip">
-                          <string>Adjust linear jog rate</string>
+                          <string>Adjust linear jog rate !</string>
                          </property>
                          <property name="maximum">
-                          <number>3600</number>
+                          <number>360</number>
                          </property>
                          <property name="singleStep">
                           <number>100</number>
@@ -8884,7 +8905,7 @@ MM/MIN</string>
                           <number>100</number>
                          </property>
                          <property name="value">
-                          <number>3000</number>
+                          <number>300</number>
                          </property>
                          <property name="orientation">
                           <enum>Qt::Vertical</enum>
@@ -9282,7 +9303,7 @@ MM/MIN</string>
                        <string>Adjust angular jog rate</string>
                       </property>
                       <property name="maximum">
-                       <number>3600</number>
+                       <number>360</number>
                       </property>
                       <property name="singleStep">
                        <number>100</number>
@@ -9291,7 +9312,7 @@ MM/MIN</string>
                        <number>100</number>
                       </property>
                       <property name="value">
-                       <number>3000</number>
+                       <number>300</number>
                       </property>
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
@@ -12443,7 +12464,7 @@ ZERO</string>
                               <string>Adjust max velocity override</string>
                              </property>
                              <property name="maximum">
-                              <number>3600</number>
+                              <number>360</number>
                              </property>
                              <property name="singleStep">
                               <number>10</number>
@@ -16327,6 +16348,23 @@ ZERO</string>
     </hint>
    </hints>
   </connection>
+  <!-- thv add open gripper -->
+  <connection>
+   <sender>btn_gripper</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>btn_gripper_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>456</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>323</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <designerdata>
   <property name="gridDeltaX">
@@ -16371,6 +16409,7 @@ ZERO</string>
   <slot>probe_help_next_clicked()</slot>
   <slot>chk_run_from_line_checked()</slot>
   <slot>btn_dimensions_clicked()</slot>
+  <slot>btn_gripper_clicked()</slot>
   <slot>disable_spindle_pause()</slot>
   <slot>disable_pause_buttons()</slot>
   <slot>chk_eoffsets_checked()</slot>

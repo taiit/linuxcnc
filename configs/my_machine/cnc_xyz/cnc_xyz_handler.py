@@ -13,6 +13,7 @@ from qtvcp.lib.qt_pdf import PDFViewer
 from qtvcp.core import Status, Action, Info, Path, Qhal
 from qtvcp import logger
 from shutil import copyfile
+from qtvcp.lib.aux_program_loader import Aux_program_loader
 
 LOG = logger.getLogger(__name__)
 KEYBIND = Keylookup()
@@ -23,6 +24,8 @@ PATH = Path()
 STYLEEDITOR = SSE()
 WRITER = writer.Main()
 QHAL = Qhal()
+
+AUX_PRGM = Aux_program_loader()
 
 # constants for tab pages
 TAB_MAIN = 0
@@ -242,8 +245,16 @@ class HandlerClass:
         # external offset control pins
         QHAL.newpin("eoffset-enable", QHAL.HAL_BIT, QHAL.HAL_OUT)
         QHAL.newpin("eoffset-clear", QHAL.HAL_BIT, QHAL.HAL_OUT)
+        QHAL.newpin("eoffset-spindle-count", QHAL.HAL_S32, QHAL.HAL_OUT)
         QHAL.newpin("eoffset-count", QHAL.HAL_S32, QHAL.HAL_OUT)
+        
         pin = QHAL.newpin("eoffset-value", QHAL.HAL_FLOAT, QHAL.HAL_IN)
+        pin.value_changed.connect(self.eoffset_changed)
+        
+        # Offset z compensation
+        pin = QHAL.newpin("eoffset-zlevel-count", QHAL.HAL_S32, QHAL.HAL_IN)
+        pin.value_changed.connect(self.comp_count_changed)
+        QHAL.newpin("comp-on", Qhal.HAL_BIT, Qhal.HAL_OUT)
 
     def init_preferences(self):
         if not self.w.PREFS_:
@@ -450,6 +461,13 @@ class HandlerClass:
     def mb_errors_changed(self, data):
         errors = self.h['spindle-modbus-errors']
         self.w.lbl_mb_errors.setText(str(errors))
+    
+    def eoffset_changed(self, data):
+        self.w.z_comp_eoffset_value.setText(format(data*.001, '.3f'))
+
+    def comp_count_changed(self):
+        if self.w.btn_enable_comp.isChecked():
+            self.h['eoffset-count'] = self.h['eoffset-zlevel-count']
 
     def dialog_return(self, w, message):
         rtn = message.get('RETURN')
@@ -802,7 +820,32 @@ class HandlerClass:
     def btn_dimensions_clicked(self, state):
         self.w.gcodegraphics.show_extents_option = state
         self.w.gcodegraphics.clear_live_plotter()
-        
+
+    def btn_gripper_clicked(self, state):
+        print("thv btn_gripper_clicked")
+        AUX_PRGM.load_gcode_ripper()
+
+    
+    def btn_enable_comp_clicked(self, state):
+        if state:
+            fname = os.path.join(PATH.CONFIGPATH, "probe_points.txt")
+            if not os.path.isfile(fname):
+                self.add_status(fname + " not found", CRITICAL)
+                self.w.btn_enable_comp.setChecked(False)
+                return
+            if not QHAL.hal.component_exists("z_level_compensation"):
+                self.add_status("Z level compensation HAL component not loaded", CRITICAL)
+                self.w.btn_enable_comp.setChecked(False)
+                return
+            self.h['comp-on'] = True
+            self.add_status("Z level compensation ON")
+        else:
+            if not QHAL.hal.component_exists("z_level_compensation"):
+                self.add_status("Z level compensation HAL component not loaded", CRITICAL)
+                return
+            self.h['comp-on'] = False
+            self.add_status("Z level compensation OFF", WARNING)
+    
     # camview tab
     def cam_zoom_changed(self, value):
         self.w.camview.scale = float(value) / 10
@@ -917,6 +960,7 @@ class HandlerClass:
     def disable_spindle_pause(self):
         self.h['eoffset-count'] = 0
         self.h['spindle-inhibit'] = False
+        self.h['eoffset-spindle-count'] = 0
         if self.w.btn_spindle_pause.isChecked():
             self.w.btn_spindle_pause.setChecked(False)
 
@@ -987,6 +1031,7 @@ class HandlerClass:
             self.add_status("Machine OFF")
         self.w.btn_spindle_pause.setChecked(False)
         self.h['eoffset-count'] = 0
+        self.h['eoffset-spindle-count'] = 0
         for widget in self.onoff_list:
             self.w[widget].setEnabled(state)
 

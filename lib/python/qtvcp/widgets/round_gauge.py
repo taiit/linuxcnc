@@ -81,7 +81,7 @@ class Gauge(QtWidgets.QWidget, _HalWidgetBase):
         segment2 = span1 - 45
         span2 = 270 - span1
         rect = QRect()
-        rect.setSize(QSize(w/2, w/2))
+        rect.setSize(QSize(int(w/2), int(w/2) ))
         rect.moveCenter(event.rect().center())
         qp.setPen(QPen(self._zone1_color, self.arc_width, cap = Qt.FlatCap))
         qp.drawArc(rect, segment1*16, span1*16)
@@ -91,7 +91,7 @@ class Gauge(QtWidgets.QWidget, _HalWidgetBase):
     def draw_gauge(self, qp, event, w):
         w *= 0.6
         rect = QRect()
-        rect.setSize(QSize(w, w))
+        rect.setSize(QSize(int(w), int(w)))
         rect.moveCenter(event.rect().center())
         center = rect.center()
         qp.setPen(QPen(Qt.white, self.tick_width, cap = Qt.FlatCap))
@@ -128,7 +128,7 @@ class Gauge(QtWidgets.QWidget, _HalWidgetBase):
     def draw_center(self, qp, event, w):
         w *= 0.2
         rect = QRect()
-        rect.setSize(QSize(w, w))
+        rect.setSize(QSize(int(w), int(w)))
         rect.moveCenter(event.rect().center())
         rad = rect.width()/2
         cap = QRadialGradient(rect.center(), rad)
@@ -162,7 +162,7 @@ class Gauge(QtWidgets.QWidget, _HalWidgetBase):
     def draw_readout(self, qp, event, w):
         center = event.rect().center()
         rect = QRect()
-        rect.setSize(QSize(w/4, w/8))
+        rect.setSize(QSize(int(w/4), int(w/8)))
         rect.moveCenter(QPoint(center.x(), center.y() + w/4))
         text = "{}".format(self.value)
         qp.setPen(QPen(Qt.white, 4))

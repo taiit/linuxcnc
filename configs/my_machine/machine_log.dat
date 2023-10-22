@@ -1,35 +1,12 @@
---- QtVCP Screen Started on: Sun, Oct 15 2023 20:42:12 ---
-Sun15 20:42: CRITICAL - no preference file found, enable preferences in screenoptions widget
-Sun15 20:42: Machine OFF
-Sun15 20:42: Hard limits tripped
-Sun15 20:42: Loaded program file : /home/taihv/linuxcnc/nc_files/test.ngc
-Sun15 20:42: Loaded file /home/taihv/linuxcnc/nc_files/test.ngc
-Sun15 20:48: Loaded program file : /home/taihv/linuxcnc/nc_files/test_probe_only.ngc
-Sun15 20:48: Loaded file /home/taihv/linuxcnc/nc_files/test_probe_only.ngc
-Sun15 20:50: Loaded file /home/taihv/linuxcnc/nc_files/test_probe_only.ngc
-Sun15 20:50: Loaded program file : /home/taihv/linuxcnc/nc_files/test_probe_only.ngc
-Sun15 20:50: Machine ON
-Sun15 20:50: Machine must be is homed
-Sun15 20:50: Started program from line 1
-Sun15 20:51: Probe tripped during non-probe move.
-Sun15 20:51: Run timer stopped at 00:00:13
-Sun15 20:51: Started program from line 1
-Sun15 20:55: Probe tripped during non-probe move.
-Sun15 20:55: Run timer stopped at 00:04:05
-Sun15 20:55: Cannot switch pages while in AUTO mode
-Sun15 20:55: Loaded program file : /home/taihv/linuxcnc/nc_files/test.ngc
-Sun15 20:55: Loaded file /home/taihv/linuxcnc/nc_files/test.ngc
-Sun15 20:55: Loaded program file : /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
-Sun15 20:55: Loaded file /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
-Sun15 20:56: Loaded program file : /home/taihv/linuxcnc/nc_files/test_circle_10ms_probe_only.ngc
-Sun15 20:56: Loaded file /home/taihv/linuxcnc/nc_files/test_circle_10ms_probe_only.ngc
-Sun15 20:57: Started program from line 1
-Sun15 20:57: Run timer stopped at 00:00:37
-Sun15 20:58: Cannot switch pages while in AUTO mode
-Sun15 20:58: Cannot switch pages while in AUTO mode
-Sun15 20:58: Loaded program file : /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
-Sun15 20:58: Loaded file /home/taihv/linuxcnc/nc_files/test_circle_10ms.ngc
-Sun15 20:58: Z level compensation ON
-Sun15 20:58: Must be in AUTO mode to run a program
-Sun15 20:58: Started program from line 1
-Sun15 20:58: Run timer stopped at 00:00:21
+--- QtVCP Screen Started on: Sun, Oct 22 2023 20:55:04 ---
+Sun22 20:55: CRITICAL - no preference file found, enable preferences in screenoptions widget
+Sun22 20:55: Machine OFF
+Sun22 20:55: Hard limits tripped
+Sun22 20:55: Machine ON
+Sun22 20:55: Loaded program file : /home/taihv/linuxcnc/nc_files/test.ngc
+Sun22 20:55: Loaded file /home/taihv/linuxcnc/nc_files/test.ngc
+Sun22 20:55: Started program from line 1
+Sun22 20:55: Unexpected realtime delay on task 0 with period 90000
+This Message will only display once per session.
+Run the Latency Test and resolve before continuing.
+

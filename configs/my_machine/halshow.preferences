@@ -22,8 +22,10 @@ set ::watchlist {
     pin+z_level_compensation.x-pos
     pin+z_level_compensation.y-pos
     pin+z_level_compensation.z-pos
+    pin+pwmgen.0.dir
+    pin+pwmgen.0.pwm
 }
-set ::workmode watchhal
+set ::workmode showhal
 set ::watchInterval 100
 set ::col1_width 100
 set ::ffmts 
